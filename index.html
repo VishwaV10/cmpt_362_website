@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" referrerpolicy="strict-origin-when-cross-origin"/>
@@ -142,6 +142,47 @@
   </div>
 </section>
 
+Team contribution:
+Arshdeep Kaur: 
+Sign up page using email
+Login using email and password
+Pantry and Receipt Repository files
+Aggregated Adapter and activity for the main fragment
+Individual Adapter and activity for viewing individual Pantry items
+Update Option for each pantry item with delete option
+Barcode picture using the Camera
+Barcode parsing using ML library
+Getting pantry item info using barcode using the Open Food Facts public API
+Receipt scanning using camera
+Receipt parsing usingGoogle Cloud Document AI – Receipt/Invoice processor in backend
+Coroutines to save items in the firestore or run things on top of main thread
+Jasleen Kaur:  
+Navigation architecture setup (Navigation Component)
+ViewPager2 implementation with 3 fragments (Pantry, Recipes, Budget)
+Settings page and ProfileActivity
+Store Fragment with Google Maps integration
+CameraX implementation for profile picture, receipt and barcode scanning
+UI/UX improvements across the app
+MVVM architecture diagram design
+Threading architecture diagram design
+Firebase user settings setup
+Saved stores feature (recent searched stores in maps)
+Anil Pirwani: 
+Integration of Firebase Google Sign-In including the configuration of the Firebase console and managing SHA-1 keys.
+Co-designed the database schema (PantryItem), created Data Access Objects (DAOs), and built the Repository pattern
+Developed the initial logic for synchronizing local Room data with the cloud (Firestore)
+Authored the project's README.md to provide comprehensive documentation
+Led the creation and editing of all the videos submitted throughout the project duration.
+Implemented a background notification system using Android WorkManager whichruns periodically (even when the app is closed) to check the firestore database for items that are expiring soon or low in quantity, and alerts the user via system notifications
+Hoa An Do:
+IntegratedGemini 2.5 Flash to analyze pantry data retrieved from cloud (Firestore), and getting data about dietary preferences from cloud (Firestore) to refine AI generated recipes for users.
+Developed the save/delete functionality allowing users to save/delete therecipes straight to/from cloud (Firestore).
+Designed and implemented the user interface for the Recipe and MyCookbook tabs.
+Vishwa Venkateshwaran:
+Budget Tracking & Purchase Management
+Purchase history
+Budget setting and monitoring
+
 <div class="section">
   <h2>App Screenshots</h2>
 
@@ -175,7 +216,7 @@
 </div>
 
 <div class="section">
-  <h2><a href="https://www.youtube.com/watch?v=-DGc3awTNNc">Final Project Video</a></h2>
+  <h2><a href="https://www.youtube.com/watch?v=-DGc3awTNNc">Final Project Pitch</a></h2>
   <div class="youtube-container">
     <iframe 
       src="https://www.youtube.com/embed/-DGc3awTNNc"
@@ -211,6 +252,11 @@
   </div>
 </div>
 
+Link: https://1sfu-my.sharepoint.com/:p:/g/personal/jka296_sfu_ca/EQ6Cg64v0ndHn0XoQPIwXIoBKtT3ECkH0k0SvRRahLo55A?e=iINnZd&share=cQoOgoOuL9J3R59F6EDyMFyKEgUAI0VGVCxhfVJ2XzOCjvP-GA
+<iframe src="https://1sfu-my.sharepoint.com/personal/jka296_sfu_ca/_layouts/15/Doc.aspx?sourcedoc={ae83820e-d22f-4777-9f45-e840f2305c8a}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="476px" height="288px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+Link to powerpoint: https://1sfu-my.sharepoint.com/:p:/g/personal/jka296_sfu_ca/ETJqUzuWnhZAmRFZImgO0X0BU4LwEcK7jXuNiFWroN2hDQ?e=yrWSVH&share=cQoyalM7lp4WQJkRWSJoDtF9EgUAJB6KOjyL2YQLYkg6URr6Eg
+<iframe src="https://1sfu-my.sharepoint.com/personal/jka296_sfu_ca/_layouts/15/Doc.aspx?sourcedoc={3b536a32-9e96-4016-9911-5922680ed17d}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="476px" height="288px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+
 <div class="section">
   <h2>Downloads & Links</h2>
 
@@ -231,6 +277,442 @@
   </a>
 
 </div>
+
+<footer>
+  © 2025 Group 20 – My Smart Pantry
+</footer>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" referrerpolicy="strict-origin-when-cross-origin"/>
+  <title>My Smart Pantry – Group 20</title>
+
+  <style>
+    * { scroll-behavior: smooth; }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    /* -------------------------------------------------------
+       Navigation Bar
+    ------------------------------------------------------- */
+    nav {
+      width: 100%;
+      background: #0a7cff;
+      color: white;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 25px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    /* -------------------------------------------------------
+       General Layout
+    ------------------------------------------------------- */
+    header {
+      background: #0a7cff;
+      padding: 40px;
+      color: white;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 40px;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      border-left: 6px solid #0a7cff;
+      padding-left: 12px;
+    }
+
+    /* -------------------------------------------------------
+       Team Member Grid
+    ------------------------------------------------------- */
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .member-card {
+      background: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-size: 18px;
+      font-weight: 500;
+      min-width: 220px;
+      text-align: center;
+    }
+
+    /* -------------------------------------------------------
+       Team Contributions (B - Styled Cards)
+    ------------------------------------------------------- */
+    .contrib-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .contrib-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .contrib-card h3 {
+      margin-top: 0;
+      color: #0a7cff;
+    }
+
+    .contrib-card ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.45;
+    }
+
+    /* -------------------------------------------------------
+       Image Grid
+    ------------------------------------------------------- */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .image-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .image-card img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #ddd;
+    }
+
+    /* -------------------------------------------------------
+       Buttons
+    ------------------------------------------------------- */
+    .button {
+      display: inline-block;
+      background: #0a7cff;
+      color: white;
+      padding: 12px 20px;
+      margin: 10px 5px 0 0;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      background: #005fcc;
+    }
+
+    /* -------------------------------------------------------
+       YouTube Embed
+    ------------------------------------------------------- */
+    .youtube-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .youtube-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* -------------------------------------------------------
+       PowerPoint Cards
+    ------------------------------------------------------- */
+    .ppt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .ppt-card {
+      background: white;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+
+    .ppt-thumbnail {
+      width: 100%;
+      height: 180px;
+      background: #cfd7e3;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #555;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #e9eef3;
+      color: #555;
+      margin-top: 40px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- Navigation ------------------------------>
+<nav>
+  <ul>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contrib">Contributions</a></li>
+    <li><a href="#screens">Screenshots</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#powerpoints">MVVM and Threaded Design and Final Project PowerPoints</a></li>
+    <li><a href="#downloads">Downloads</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>My Smart Pantry</h1>
+  <p>Group 20 – CMPT 362</p>
+</header>
+
+<!-- TEAM ----------------------------------->
+<section id="team" class="section">
+  <h2>Team Members</h2>
+  <div class="team-grid">
+    <div class="member-card">Hoa An Do</div>
+    <div class="member-card">Arshdeep Kaur</div>
+    <div class="member-card">Jasleen Kaur</div>
+    <div class="member-card">Anil Pirwani</div>
+    <div class="member-card">Vishwa Venkateshwaran</div>
+  </div>
+</section>
+
+<!-- CONTRIBUTIONS --------------------------->
+<section id="contrib" class="section">
+  <h2>Team Contributions</h2>
+
+  <div class="contrib-grid">
+
+    <div class="contrib-card">
+      <h3>Arshdeep Kaur</h3>
+      <ul>
+        <li>Sign up & Login</li>
+        <li>Pantry & Receipt Repository</li>
+        <li>Adapters & individual item views</li>
+        <li>Barcode scanning (Camera + ML)</li>
+        <li>Open Food Facts API integration</li>
+        <li>Receipt scanning via Document AI</li>
+        <li>Coroutines + Firestore saving</li>
+      </ul>
+    </div>
+
+    <div class="contrib-card">
+      <h3>Jasleen Kaur</h3>
+      <ul>
+        <li>Navigation architecture</li>
+        <li>ViewPager2 + 3 Fragments</li>
+        <li>Settings + Profile page</li>
+        <li>Store search w/ Google Maps</li>
+        <li>CameraX for profile/receipt/barcode</li>
+        <li>UI/UX improvements</li>
+        <li>Firebase user settings</li>
+      </ul>
+    </div>
+
+    <div class="contrib-card">
+      <h3>Anil Pirwani</h3>
+      <ul>
+        <li>Firebase Google Sign-In setup</li>
+        <li>Database schema + DAOs + Repository</li>
+        <li>Room ↔ Firestore sync logic</li>
+        <li>Project README</li>
+        <li>Video creation/editing</li>
+        <li>WorkManager background notifications</li>
+      </ul>
+    </div>
+
+    <div class="contrib-card">
+      <h3>Hoa An Do</h3>
+      <ul>
+        <li>Gemini 2.5 Flash integration</li>
+        <li>AI recipe refinement + preferences</li>
+        <li>Save/delete recipes on Firestore</li>
+        <li>UI for Recipe & Cookbook tabs</li>
+      </ul>
+    </div>
+
+    <div class="contrib-card">
+      <h3>Vishwa Venkateshwaran</h3>
+      <ul>
+        <li>Purchases and Budget repository</li>
+        <li>Budget tracking</li>
+        <li>Purchase management</li>
+        <li>Purchases and pantry items sync</li>
+        <li>Purchase history UI/logic</li>
+        <li>Budget limit monitoring</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SCREENSHOTS ----------------------------->
+<section id="screens" class="section">
+  <h2>App Screenshots</h2>
+
+  <div class="image-grid">
+    <div class="image-card">
+      <img src="pic_1.png">
+      <p>Scan or manually add pantry items</p>
+    </div>
+
+    <div class="image-card">
+      <img src="pic_2.png">
+      <p>Generate recipes using AI</p>
+    </div>
+
+    <div class="image-card">
+      <img src="pic_3.png">
+      <p>Search and save stores</p>
+    </div>
+
+    <div class="image-card">
+      <img src="pic_4.png">
+      <p>Budget tracking & expenditures</p>
+    </div>
+
+    <div class="image-card">
+      <img src="pic_5.png">
+      <p>Settings & customizations</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS --------------------------------->
+<section id="videos" class="section">
+  <h2>Videos</h2>
+
+  <h3>Final Project Pitch</h3>
+  <div class="youtube-container">
+    <iframe src="https://www.youtube.com/embed/-DGc3awTNNc" allowfullscreen></iframe>
+  </div>
+
+  <h3>Show and Tell 2 Demo</h3>
+  <div class="youtube-container">
+    <iframe src="https://www.youtube.com/embed/-DNvNwGqrok" allowfullscreen></iframe>
+  </div>
+
+  <h3>Show and Tell 1 Demo</h3>
+  <div class="youtube-container">
+    <iframe src="https://www.youtube.com/embed/T7tVu9OFo9w" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- POWERPOINTS ----------------------------->
+<section id="powerpoints" class="section">
+  <h2>PowerPoints</h2>
+
+  <h3><a class="button" target="_blank"
+         href="https://1sfu-my.sharepoint.com/:p:/g/personal/jka296_sfu_ca/EQ6Cg64v0ndHn0XoQPIwXIoBKtT3ECkH0k0SvRRahLo55A">
+        MVVM and Threaded Diagram
+      </a></h3>
+  <iframe src="https://1sfu-my.sharepoint.com/personal/jka296_sfu_ca/_layouts/15/Doc.aspx?sourcedoc={ae83820e-d22f-4777-9f45-e840f2305c8a}&amp;action=embedview&amp;wdAr=1.77"
+          width="100%" height="400px" frameborder="0"></iframe>
+
+  <br><br>
+
+  <h3><a class="button" target="_blank"
+         href="https://1sfu-my.sharepoint.com/:p:/g/personal/jka296_sfu_ca/ETJqUzuWnhZAmRFZImgO0X0BU4LwEcK7jXuNiFWroN2hDQ">
+        Final Project Presentation
+      </a></h3>
+  <iframe src="https://1sfu-my.sharepoint.com/personal/jka296_sfu_ca/_layouts/15/Doc.aspx?sourcedoc={3b536a32-9e96-4016-9911-5922680ed17d}&amp;action=embedview&amp;wdAr=1.77"
+          width="100%" height="400px" frameborder="0"></iframe>
+
+</section>
+
+<!-- DOWNLOADS ------------------------------->
+<section id="downloads" class="section">
+  <h2>Downloads & Links</h2>
+
+  <a class="button" href="https://github.sfu.ca/jka296/My_Smart_Pantry/releases/tag/v3.0.0" target="_blank">
+    📱 Final Project APK
+  </a>
+
+  <a class="button" href="https://github.sfu.ca/jka296/My_Smart_Pantry/releases/tag/v2.0.0" target="_blank">
+    📱 APK (Show & Tell 2)
+  </a>
+
+  <a class="button" href="https://github.sfu.ca/jka296/My_Smart_Pantry/releases/tag/v1.0.0" target="_blank">
+    📱 APK (Show & Tell 1)
+  </a>
+
+  <a class="button" href="https://github.sfu.ca/jka296/My_Smart_Pantry" target="_blank">
+    🔗 GitHub Repository
+  </a>
+</section>
+
 
 <footer>
   © 2025 Group 20 – My Smart Pantry
